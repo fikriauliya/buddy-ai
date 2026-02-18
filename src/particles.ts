@@ -68,11 +68,13 @@ function loop() {
 }
 
 const COLORS = ['#FFD93D', '#6BCB77', '#FF6B9D', '#4A9EE0', '#9B59B6', '#FF8C42', '#FF6B6B']
+const isMobile = () => window.innerWidth <= 480
 
 export function burstConfetti(x?: number, y?: number) {
   const cx = x ?? window.innerWidth / 2
   const cy = y ?? window.innerHeight / 3
-  for (let i = 0; i < 60; i++) {
+  const count = isMobile() ? 25 : 60
+  for (let i = 0; i < count; i++) {
     particles.push({
       x: cx, y: cy,
       vx: (Math.random() - 0.5) * 12,
@@ -89,7 +91,8 @@ export function burstConfetti(x?: number, y?: number) {
 }
 
 export function burstStars(x: number, y: number, count = 8) {
-  for (let i = 0; i < count; i++) {
+  const actualCount = isMobile() ? Math.min(count, 4) : count
+  for (let i = 0; i < actualCount; i++) {
     particles.push({
       x, y,
       vx: (Math.random() - 0.5) * 6,

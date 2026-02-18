@@ -17,18 +17,25 @@
 
 html, body {
   width: 100%; height: 100%;
+  min-height: 100dvh;
   overflow: hidden;
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
+  font-size: 16px;
   background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   user-select: none;
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 #app {
   width: 100%; height: 100%;
+  max-width: 100vw;
   position: relative;
   z-index: 1;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 #particles {
@@ -631,13 +638,232 @@ html, body {
   to { opacity: 1; }
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== RESPONSIVE: TABLETS ===== */
+@media (max-width: 768px) {
+  .badge-grid { grid-template-columns: repeat(3, 1fr); }
+  .topics-grid { grid-template-columns: repeat(3, 1fr); }
+  .memory-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+}
+
+/* ===== RESPONSIVE: MOBILE ===== */
 @media (max-width: 480px) {
+  .screen {
+    padding: 12px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+
   .welcome-title { font-size: 1.8rem; }
-  .topics-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .welcome-sub { font-size: 1rem; margin-bottom: 20px; }
+
+  /* Profile cards stack on very narrow screens */
+  .profiles {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .profile-card {
+    min-width: unset;
+    width: 100%;
+    max-width: 280px;
+    flex-direction: row;
+    padding: 16px 20px;
+    gap: 12px;
+    min-height: 48px;
+  }
+  .profile-avatar { font-size: 2.8rem; }
+  .profile-name { font-size: 1.2rem; }
+
+  /* Home */
+  .home-header { margin-bottom: 12px; }
+  .home-greeting { font-size: 1.5rem; }
+  .home-sub { font-size: 0.85rem; }
+  .buddy-container { width: 120px; height: 120px; margin: 8px auto; }
+
+  /* Topics grid */
+  .topics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 100%;
+  }
+  .topic-bubble {
+    padding: 10px 4px;
+    border-radius: 16px;
+    min-height: 48px;
+  }
+  .topic-emoji { font-size: 1.8rem; }
+  .topic-name { font-size: 0.75rem; }
+  .topic-stars { font-size: 0.65rem; }
+
+  /* Home bottom buttons */
+  .home-bottom {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    width: 100%;
+  }
+  .home-bottom .btn {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    min-height: 48px;
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+  }
+
+  /* Flashcard */
+  .flashcard {
+    padding: 20px 24px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 340px;
+  }
   .flashcard-emoji { font-size: 4rem; }
   .flashcard-word { font-size: 2rem; }
-  .buddy-container { width: 150px; height: 150px; }
-  .choices { gap: 10px; }
-  .choice-card { padding: 14px; font-size: 2.5rem; }
+  .flashcard .flashcard-letter { font-size: 5rem; }
+  .flashcard .flashcard-problem { font-size: 2rem; }
+  .flashcard .flashcard-dots { font-size: 1.6rem; max-width: 220px; }
+
+  /* Buddy says */
+  .buddy-says {
+    font-size: 1.1rem;
+    padding: 10px 16px;
+    max-width: 100%;
+  }
+
+  /* Story bubble */
+  .story-bubble {
+    padding: 12px 16px;
+    max-width: 100%;
+  }
+  .story-text { font-size: 1.05rem; }
+
+  /* Mic button - prominent */
+  .mic-btn {
+    width: 72px; height: 72px;
+    font-size: 1.8rem;
+    min-width: 64px;
+    min-height: 64px;
+  }
+
+  /* Choices */
+  .choices {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 100%;
+  }
+  .choice-card {
+    padding: 14px 10px;
+    font-size: 2.2rem;
+    border-radius: 16px;
+    min-height: 48px;
+  }
+  .choice-label { font-size: 0.9rem; }
+
+  /* Lesson top bar */
+  .lesson-top {
+    max-width: 100%;
+    margin-bottom: 8px;
+  }
+  .lesson-back {
+    font-size: 1.6rem;
+    padding: 8px;
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lesson-content {
+    max-width: 100%;
+    gap: 12px;
+  }
+
+  /* Memory game */
+  .memory-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 100%;
+  }
+  .memory-card {
+    font-size: 1.5rem;
+    border-radius: 12px;
+    min-height: 48px;
+  }
+
+  /* Bubble game */
+  .bubbles-area {
+    max-width: 100%;
+    height: 300px;
+  }
+  .bubble {
+    width: 80px; height: 80px;
+    font-size: 0.9rem;
+    min-width: 64px;
+    min-height: 64px;
+  }
+
+  /* Buttons - ensure 48px min tap target */
+  .btn {
+    padding: 14px 24px;
+    font-size: 1.1rem;
+    min-height: 48px;
+  }
+
+  /* Badge grid */
+  .badge-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-height: 55vh;
+    padding: 4px;
+  }
+  .badge-card {
+    padding: 12px 6px;
+    min-height: 48px;
+  }
+  .badge-card-emoji { font-size: 1.8rem; }
+  .badge-card-name { font-size: 0.7rem; }
+
+  /* Progress card */
+  .progress-card {
+    max-width: 100%;
+    padding: 16px;
+  }
+  .progress-stat { font-size: 0.95rem; padding: 8px 0; }
+  .big-stars { font-size: 2rem; margin: 10px 0; }
+
+  /* Badge popup */
+  .badge-popup-inner {
+    padding: 28px 20px;
+    margin: 16px;
+    border-radius: 24px;
+  }
+  .badge-popup-emoji { font-size: 4rem; }
+  .badge-popup-name { font-size: 1.4rem; }
+}
+
+/* ===== VERY SMALL SCREENS (320px) ===== */
+@media (max-width: 360px) {
+  .topics-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .topic-bubble { padding: 8px 2px; }
+  .topic-emoji { font-size: 1.5rem; }
+  .topic-name { font-size: 0.65rem; }
+  .home-bottom .btn { font-size: 0.85rem; padding: 10px 12px; }
+  .flashcard-emoji { font-size: 3rem; }
+  .flashcard-word { font-size: 1.6rem; }
+  .choice-card { font-size: 1.8rem; padding: 12px 8px; }
+  .buddy-container { width: 100px; height: 100px; }
+  .welcome-title { font-size: 1.5rem; }
 }
