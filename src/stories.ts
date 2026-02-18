@@ -63,37 +63,37 @@ export const TOPIC_STORIES: Record<string, TopicStory> = {
     conclusion: "Buddy built his robot friend! They high-five and dance together! 🤖🎉💃"
   },
   alphabet: {
-    intro: "Buddy found a magical book! Each page reveals a special letter with a surprise...",
+    intro: "Buddy is reading a magical book! Each page has a special letter. Let's discover them all!",
     transitions: [
-      "Buddy turns the page and discovers a new letter...",
-      "The book glows! Another letter appears...",
-      "Buddy traces the letter with his finger. Next one is...",
-      "What a wonderful letter! Buddy flips to the next page...",
-      "The magical book sparkles! Here comes another letter..."
+      "Buddy turns the page and finds a new letter!",
+      "What letter is on the next page? Let's see!",
+      "The magical book glows! Another letter appears...",
+      "Buddy is so excited! He flips to the next letter...",
+      "The book sparkles! Here comes another letter..."
     ],
-    conclusion: "Buddy read the whole magical alphabet book! He knows all 26 letters! 🔤📖✨"
+    conclusion: "Buddy read the whole magical book! He knows all his ABCs now! 🔤📖✨"
   },
   shapes: {
-    intro: "Buddy is exploring Shape World! Everything here has a special shape...",
+    intro: "Buddy is exploring a shape world! Everything here has a special shape. Can you help him name them?",
     transitions: [
-      "Buddy looks around and spots another shape...",
-      "Shape World is amazing! Buddy finds a new shape...",
-      "Buddy reaches out and touches the next shape...",
-      "The shapes are everywhere! Buddy discovers a...",
-      "Buddy spins around and sees another shape..."
+      "Buddy walks further into shape world and spots a new shape!",
+      "Look! Another shape is floating in the sky!",
+      "Buddy picks up something interesting. What shape is it?",
+      "The shape world is full of surprises! Here's another one...",
+      "Can you find shapes like this around you? Here's the next one..."
     ],
-    conclusion: "Buddy explored all of Shape World! He's a shape expert now! 🔷🌍⭐"
+    conclusion: "Buddy explored the whole shape world! He can spot shapes everywhere now! 🔷⭐🔺"
   },
   math: {
-    intro: "Buddy discovered a treasure cave! Help him count all the gems...",
+    intro: "Buddy found a treasure chest! Help him count the gems inside. Let's do some math!",
     transitions: [
-      "Buddy finds more gems! Let's add them up...",
-      "The cave sparkles brighter! Another math puzzle appears...",
-      "Buddy picks up shiny gems and counts carefully...",
-      "Amazing! Buddy digs deeper and finds another equation...",
-      "The treasure keeps coming! Buddy solves the next one..."
+      "Buddy reaches into the chest and pulls out more gems!",
+      "The treasure chest glows! More gems appear...",
+      "Buddy loves counting! Let's try another one...",
+      "How many gems does Buddy have now? Let's count!",
+      "The magical chest has more surprises inside..."
     ],
-    conclusion: "Buddy solved all the treasure math! He's a true Math Wizard! 🧮💎🏆"
+    conclusion: "Buddy counted all the treasures! He's a real math wizard! 🧮💎🏆"
   }
 }
 

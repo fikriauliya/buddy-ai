@@ -2,6 +2,14 @@
 export interface WordItem {
   word: string
   emoji: string
+  /** For alphabet: the letter */
+  letter?: string
+  /** For alphabet: phonics sound description */
+  phonics?: string
+  /** For alphabet: example word */
+  example?: string
+  /** For math: the answer number */
+  answer?: number
 }
 
 export interface Topic {
@@ -10,6 +18,8 @@ export interface Topic {
   emoji: string
   color: string
   words: WordItem[]
+  /** Special topic type for custom lesson flow */
+  type?: 'vocabulary' | 'alphabet' | 'shapes' | 'math'
 }
 
 export const TOPICS: Topic[] = [
@@ -68,41 +78,66 @@ export const TOPICS: Topic[] = [
     ]
   },
   {
-    id: 'alphabet', name: 'Alphabet', emoji: '🔤', color: '#E74C3C',
+    id: 'alphabet', name: 'ABCs', emoji: '🔤', color: '#E74C3C', type: 'alphabet',
     words: [
-      { word: 'A - Apple', emoji: '🍎' }, { word: 'B - Bear', emoji: '🐻' },
-      { word: 'C - Cat', emoji: '🐱' }, { word: 'D - Dog', emoji: '🐶' },
-      { word: 'E - Egg', emoji: '🥚' }, { word: 'F - Fish', emoji: '🐟' },
-      { word: 'G - Grape', emoji: '🍇' }, { word: 'H - Hat', emoji: '🎩' },
-      { word: 'I - Ice cream', emoji: '🍦' }, { word: 'J - Juice', emoji: '🧃' },
-      { word: 'K - Kite', emoji: '🪁' }, { word: 'L - Lion', emoji: '🦁' },
-      { word: 'M - Moon', emoji: '🌙' }, { word: 'N - Nest', emoji: '🪺' },
-      { word: 'O - Orange', emoji: '🍊' }, { word: 'P - Penguin', emoji: '🐧' },
-      { word: 'Q - Queen', emoji: '👑' }, { word: 'R - Rainbow', emoji: '🌈' },
-      { word: 'S - Sun', emoji: '☀️' }, { word: 'T - Tree', emoji: '🌳' },
-      { word: 'U - Umbrella', emoji: '☂️' }, { word: 'V - Violin', emoji: '🎻' },
-      { word: 'W - Water', emoji: '💧' }, { word: 'X - Xylophone', emoji: '🎵' },
-      { word: 'Y - Yacht', emoji: '⛵' }, { word: 'Z - Zebra', emoji: '🦓' }
+      { word: 'A', emoji: '🍎', letter: 'A', phonics: 'ah', example: 'Apple' },
+      { word: 'B', emoji: '🐻', letter: 'B', phonics: 'buh', example: 'Bear' },
+      { word: 'C', emoji: '🐱', letter: 'C', phonics: 'kuh', example: 'Cat' },
+      { word: 'D', emoji: '🐶', letter: 'D', phonics: 'duh', example: 'Dog' },
+      { word: 'E', emoji: '🥚', letter: 'E', phonics: 'eh', example: 'Egg' },
+      { word: 'F', emoji: '🐟', letter: 'F', phonics: 'fuh', example: 'Fish' },
+      { word: 'G', emoji: '🍇', letter: 'G', phonics: 'guh', example: 'Grape' },
+      { word: 'H', emoji: '🎩', letter: 'H', phonics: 'huh', example: 'Hat' },
+      { word: 'I', emoji: '🍦', letter: 'I', phonics: 'ih', example: 'Ice cream' },
+      { word: 'J', emoji: '🧃', letter: 'J', phonics: 'juh', example: 'Juice' },
+      { word: 'K', emoji: '🪁', letter: 'K', phonics: 'kuh', example: 'Kite' },
+      { word: 'L', emoji: '🦁', letter: 'L', phonics: 'luh', example: 'Lion' },
+      { word: 'M', emoji: '🌙', letter: 'M', phonics: 'muh', example: 'Moon' },
+      { word: 'N', emoji: '🪺', letter: 'N', phonics: 'nuh', example: 'Nest' },
+      { word: 'O', emoji: '🍊', letter: 'O', phonics: 'oh', example: 'Orange' },
+      { word: 'P', emoji: '🐧', letter: 'P', phonics: 'puh', example: 'Penguin' },
+      { word: 'Q', emoji: '👑', letter: 'Q', phonics: 'kwuh', example: 'Queen' },
+      { word: 'R', emoji: '🌈', letter: 'R', phonics: 'ruh', example: 'Rainbow' },
+      { word: 'S', emoji: '☀️', letter: 'S', phonics: 'sss', example: 'Sun' },
+      { word: 'T', emoji: '🌳', letter: 'T', phonics: 'tuh', example: 'Tree' },
+      { word: 'U', emoji: '☂️', letter: 'U', phonics: 'uh', example: 'Umbrella' },
+      { word: 'V', emoji: '🎻', letter: 'V', phonics: 'vuh', example: 'Violin' },
+      { word: 'W', emoji: '💧', letter: 'W', phonics: 'wuh', example: 'Water' },
+      { word: 'X', emoji: '🎵', letter: 'X', phonics: 'ks', example: 'Xylophone' },
+      { word: 'Y', emoji: '⛵', letter: 'Y', phonics: 'yuh', example: 'Yacht' },
+      { word: 'Z', emoji: '🦓', letter: 'Z', phonics: 'zzz', example: 'Zebra' }
     ]
   },
   {
-    id: 'shapes', name: 'Shapes', emoji: '🔷', color: '#1ABC9C',
+    id: 'shapes', name: 'Shapes', emoji: '🔷', color: '#1ABC9C', type: 'shapes',
     words: [
-      { word: 'circle', emoji: '⭕' }, { word: 'square', emoji: '🟥' },
-      { word: 'triangle', emoji: '🔺' }, { word: 'star', emoji: '⭐' },
-      { word: 'heart', emoji: '❤️' }, { word: 'diamond', emoji: '💎' },
-      { word: 'rectangle', emoji: '▬' }, { word: 'oval', emoji: '🥚' }
+      { word: 'circle', emoji: '⭕' },
+      { word: 'square', emoji: '🟥' },
+      { word: 'triangle', emoji: '🔺' },
+      { word: 'star', emoji: '⭐' },
+      { word: 'heart', emoji: '❤️' },
+      { word: 'diamond', emoji: '💎' },
+      { word: 'rectangle', emoji: '▬' },
+      { word: 'oval', emoji: '🥚' }
     ]
   },
   {
-    id: 'math', name: 'Math', emoji: '🧮', color: '#F39C12',
+    id: 'math', name: 'Math', emoji: '🧮', color: '#F39C12', type: 'math',
     words: [
-      { word: '1 + 1 = 2', emoji: '🍎🍎' }, { word: '2 + 1 = 3', emoji: '🍎🍎🍎' },
-      { word: '1 + 2 = 3', emoji: '⭐⭐⭐' }, { word: '2 + 2 = 4', emoji: '🟡🟡🟡🟡' },
-      { word: '3 + 1 = 4', emoji: '🔵🔵🔵🔵' }, { word: '3 + 2 = 5', emoji: '🍎🍎🍎🍎🍎' },
-      { word: '4 + 1 = 5', emoji: '⭐⭐⭐⭐⭐' }, { word: '2 + 3 = 5', emoji: '🟢🟢🟢🟢🟢' },
-      { word: '5 + 5 = 10', emoji: '🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴' },
-      { word: '3 + 3 = 6', emoji: '🟡🟡🟡🟡🟡🟡' }
+      { word: '1 + 1', emoji: '🍎🍎', answer: 2 },
+      { word: '2 + 1', emoji: '⭐⭐⭐', answer: 3 },
+      { word: '1 + 2', emoji: '🔵🔵🔵', answer: 3 },
+      { word: '2 + 2', emoji: '🟡🟡🟡🟡', answer: 4 },
+      { word: '3 + 1', emoji: '🍎🍎🍎🍎', answer: 4 },
+      { word: '3 + 2', emoji: '🟢🟢🟢🟢🟢', answer: 5 },
+      { word: '4 + 1', emoji: '⭐⭐⭐⭐⭐', answer: 5 },
+      { word: '2 + 3', emoji: '🔴🔴🔴🔴🔴', answer: 5 },
+      { word: '3 + 3', emoji: '🟡🟡🟡🟡🟡🟡', answer: 6 },
+      { word: '4 + 2', emoji: '🍎🍎🍎🍎🍎🍎', answer: 6 },
+      { word: '4 + 3', emoji: '⭐⭐⭐⭐⭐⭐⭐', answer: 7 },
+      { word: '4 + 4', emoji: '🔵🔵🔵🔵🔵🔵🔵🔵', answer: 8 },
+      { word: '5 + 4', emoji: '🟢🟢🟢🟢🟢🟢🟢🟢🟢', answer: 9 },
+      { word: '5 + 5', emoji: '🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴', answer: 10 }
     ]
   }
 ]

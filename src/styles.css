@@ -153,9 +153,9 @@ html, body {
 
 .topics-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  max-width: 420px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 500px;
   width: 100%;
   margin: 10px 0;
 }
@@ -468,6 +468,48 @@ html, body {
 @keyframes starBurst {
   0% { transform: scale(0) rotate(0deg); opacity: 1; }
   100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+}
+
+/* ===== ALPHABET FLASHCARD ===== */
+.flashcard-alphabet .flashcard-letter,
+.flashcard .flashcard-letter {
+  font-size: 7rem;
+  line-height: 1;
+  color: var(--red);
+  font-weight: 900;
+}
+.flashcard-alphabet .flashcard-phonics,
+.flashcard .flashcard-phonics {
+  font-size: 1.5rem;
+  color: #888;
+  font-style: italic;
+  margin: 4px 0;
+}
+.flashcard-alphabet .flashcard-example {
+  font-size: 1.6rem;
+  color: var(--blue-dark);
+}
+
+/* ===== MATH FLASHCARD ===== */
+.flashcard-math .flashcard-problem,
+.flashcard .flashcard-problem {
+  font-size: 2.5rem;
+  color: var(--orange);
+  font-weight: 900;
+}
+.flashcard-math .flashcard-dots,
+.flashcard .flashcard-dots {
+  font-size: 2rem;
+  letter-spacing: 4px;
+  margin: 8px 0;
+  line-height: 1.4;
+  word-break: break-all;
+  max-width: 280px;
+}
+.flashcard-math .flashcard-answer {
+  font-size: 3rem;
+  color: var(--green);
+  font-weight: 900;
 }
 
 /* ===== REVIEW BADGE ===== */

@@ -108,6 +108,12 @@ export const BADGES: Badge[] = [
     check: (_p, _sr, s) => s.daysPlayed >= 10 },
   { id: 'speed_learner', name: 'Speed Learner', emoji: '⚡', hint: 'Learn 10 words in one session',
     check: (_p, _sr, s) => s.maxWordsInSession >= 10 },
+  { id: 'abc_master', name: 'ABC Master', emoji: '🔤', hint: 'Learn all letters',
+    check: (p) => allWordsInTopic(p, 'alphabet') },
+  { id: 'shape_finder', name: 'Shape Finder', emoji: '🔷', hint: 'Learn all shapes',
+    check: (p) => allWordsInTopic(p, 'shapes') },
+  { id: 'math_wizard', name: 'Math Wizard', emoji: '🧮', hint: 'Complete all math lessons',
+    check: (p) => allWordsInTopic(p, 'math') },
 ]
 
 export function checkNewBadges(

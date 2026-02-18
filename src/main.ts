@@ -307,6 +307,55 @@ async function showLessonWarmup() {
   document.getElementById('btn-start')!.onclick = () => showFlashcard()
 }
 
+function renderFlashcardContent(word: WordItem & { isReview?: boolean }): { html: string, speechText: string, buddyText: string } {
+  const topicType = currentTopic?.type || 'vocabulary'
+
+  if (topicType === 'alphabet' && word.letter) {
+    // Alphabet: show letter big, example word + emoji, phonics
+    return {
+      html: `
+        <div class="flashcard flashcard-alphabet">
+          ${word.isReview ? '<div class="review-badge">📖 Review</div>' : ''}
+          <div class="flashcard-letter">${word.letter}</div>
+          <div class="flashcard-phonics">"${word.phonics}"</div>
+          <div class="flashcard-example">${word.emoji} ${word.example}</div>
+        </div>
+      `,
+      speechText: `${word.letter}... ${word.phonics}... ${word.example}!`,
+      buddyText: `${word.letter} is for ${word.example}! ${word.emoji} It makes the "${word.phonics}" sound.`
+    }
+  }
+
+  if (topicType === 'math' && word.answer !== undefined) {
+    // Math: show the problem and visual dots
+    return {
+      html: `
+        <div class="flashcard flashcard-math">
+          ${word.isReview ? '<div class="review-badge">📖 Review</div>' : ''}
+          <div class="flashcard-problem">${word.word}</div>
+          <div class="flashcard-dots">${word.emoji}</div>
+          <div class="flashcard-answer">= ${word.answer}</div>
+        </div>
+      `,
+      speechText: `${word.word} equals ${word.answer}. Count with me: ${word.emoji.replace(/./gu, '')}`,
+      buddyText: `How many is ${word.word}? Count them: ${word.emoji} That's ${word.answer}!`
+    }
+  }
+
+  // Default vocabulary / shapes
+  return {
+    html: `
+      <div class="flashcard">
+        ${word.isReview ? '<div class="review-badge">📖 Review</div>' : ''}
+        <div class="flashcard-emoji">${word.emoji}</div>
+        <div class="flashcard-word">${word.word}</div>
+      </div>
+    `,
+    speechText: `This is ${word.word}`,
+    buddyText: `This is "${word.word}"! Can you say it?`
+  }
+}
+
 async function showFlashcard() {
   if (lessonIndex >= lessonWords.length) {
     showPracticeRound()
@@ -314,6 +363,7 @@ async function showFlashcard() {
   }
   const word = lessonWords[lessonIndex]
   const pct = (lessonIndex / (lessonWords.length * 2)) * 100
+  const { html: cardHtml, speechText, buddyText } = renderFlashcardContent(word)
 
   // Story transition between cards (not on first card)
   const storyTransition = lessonIndex > 0 ? getTransition(currentTopic!.id, lessonIndex - 1) : ''
@@ -321,12 +371,8 @@ async function showFlashcard() {
   renderLessonShell(`
     <div class="buddy-container" id="lesson-buddy"></div>
     ${storyTransition ? `<div class="story-bubble"><div class="story-text">${storyTransition}</div></div>` : ''}
-    <div class="flashcard">
-      ${word.isReview ? '<div class="review-badge">📖 Review</div>' : ''}
-      <div class="flashcard-emoji">${word.emoji}</div>
-      <div class="flashcard-word">${word.word}</div>
-    </div>
-    <div class="buddy-says" id="buddy-msg">This is "${word.word}"! Can you say it?</div>
+    ${cardHtml}
+    <div class="buddy-says" id="buddy-msg">${buddyText}</div>
     ${hasSpeechRecognition()
       ? `<button class="mic-btn" id="mic-btn">🎤</button>`
       : `<button class="btn btn-green" id="tap-btn">I said it! ✓</button>`
@@ -339,7 +385,7 @@ async function showFlashcard() {
   }
 
   setBuddyState('talking')
-  await speak(`This is ${word.word}`)
+  await speak(speechText)
   setBuddyState('idle')
 
   if (hasSpeechRecognition()) {
@@ -408,6 +454,108 @@ async function showPracticeQuestion() {
   }
   const target = lessonWords[practiceIndex]
   const allWords = currentTopic!.words
+  const topicType = currentTopic?.type || 'vocabulary'
+
+  // Math practice: "How many?" with number choices
+  if (topicType === 'math' && target.answer !== undefined) {
+    const pct = 50 + (practiceIndex / lessonWords.length) * 25
+    const correctAns = target.answer
+    // Generate number distractors
+    const nums = new Set<number>([correctAns])
+    while (nums.size < 4) nums.add(Math.max(1, Math.min(10, correctAns + Math.floor(Math.random() * 5) - 2)))
+    const options = shuffle([...nums])
+
+    renderLessonShell(`
+      <div class="buddy-container" id="lesson-buddy"></div>
+      <div class="flashcard flashcard-math">
+        <div class="flashcard-problem">${target.word} = ?</div>
+        <div class="flashcard-dots">${target.emoji}</div>
+      </div>
+      <div class="buddy-says" id="buddy-msg">How many is ${target.word}? Count them! 🔢</div>
+      <div class="choices" id="choices"></div>
+    `, pct)
+
+    setBuddyState('talking')
+    await speak(`How many is ${target.word}? Count them!`)
+    setBuddyState('idle')
+
+    const choicesEl = document.getElementById('choices')!
+    options.forEach(num => {
+      const card = $(`<div class="choice-card" data-word="${num}"><div class="choice-label" style="font-size:2rem">${num}</div></div>`)
+      card.onclick = async () => {
+        if (num === correctAns) {
+          card.classList.add('correct')
+          burstStars(card.getBoundingClientRect().left + 50, card.getBoundingClientRect().top)
+          addStars(1)
+          trackWordSR(currentTopic!.id, target.word, true)
+          setBuddyState('celebrating')
+          await speak(`Yes! ${target.word} equals ${correctAns}!`)
+          await delay(600)
+          practiceIndex++
+          showPracticeQuestion()
+        } else {
+          card.classList.add('wrong')
+          trackWordSR(currentTopic!.id, target.word, false)
+          setBuddyState('encouraging')
+          await speak(`Not quite. Try counting again!`)
+          setBuddyState('idle')
+          setTimeout(() => card.classList.remove('wrong'), 400)
+        }
+      }
+      choicesEl.appendChild(card)
+    })
+    return
+  }
+
+  // Alphabet practice: "What letter is this?" show emoji, pick letter
+  if (topicType === 'alphabet' && target.letter) {
+    const pct = 50 + (practiceIndex / lessonWords.length) * 25
+    const distractors = shuffle(allWords.filter(w => w.word !== target.word)).slice(0, 3)
+    const options = shuffle([target, ...distractors])
+
+    renderLessonShell(`
+      <div class="buddy-container" id="lesson-buddy"></div>
+      <div class="flashcard flashcard-alphabet">
+        <div class="flashcard-emoji">${target.emoji}</div>
+        <div class="flashcard-example">${target.example}</div>
+      </div>
+      <div class="buddy-says" id="buddy-msg">What letter does "${target.example}" start with? 🔤</div>
+      <div class="choices" id="choices"></div>
+    `, pct)
+
+    setBuddyState('talking')
+    await speak(`What letter does ${target.example} start with?`)
+    setBuddyState('idle')
+
+    const choicesEl = document.getElementById('choices')!
+    options.forEach(opt => {
+      const card = $(`<div class="choice-card" data-word="${opt.word}"><div class="choice-label" style="font-size:2.5rem">${opt.letter || opt.word}</div></div>`)
+      card.onclick = async () => {
+        if (opt.word === target.word) {
+          card.classList.add('correct')
+          burstStars(card.getBoundingClientRect().left + 50, card.getBoundingClientRect().top)
+          addStars(1)
+          trackWordSR(currentTopic!.id, target.word, true)
+          setBuddyState('celebrating')
+          await speak(`Yes! ${target.letter} is for ${target.example}!`)
+          await delay(600)
+          practiceIndex++
+          showPracticeQuestion()
+        } else {
+          card.classList.add('wrong')
+          trackWordSR(currentTopic!.id, target.word, false)
+          setBuddyState('encouraging')
+          await speak(`That's ${opt.letter || opt.word}. Try again!`)
+          setBuddyState('idle')
+          setTimeout(() => card.classList.remove('wrong'), 400)
+        }
+      }
+      choicesEl.appendChild(card)
+    })
+    return
+  }
+
+  // Default vocabulary/shapes practice
   const distractors = shuffle(allWords.filter(w => w.word !== target.word)).slice(0, 3)
   const options = shuffle([target, ...distractors])
 
@@ -481,12 +629,28 @@ async function showQuizQuestion() {
   }
   const word = lessonWords[quizIndex]
   const pct = 75 + (quizIndex / lessonWords.length) * 25
+  const topicType = currentTopic?.type || 'vocabulary'
+
+  let quizPrompt = 'What is this? 🤔'
+  let quizSpeech = 'What is this?'
+  let flashcardInner = `<div class="flashcard-emoji">${word.emoji}</div>`
+
+  if (topicType === 'alphabet' && word.letter) {
+    quizPrompt = `What sound does ${word.letter} make? 🔤`
+    quizSpeech = `What sound does ${word.letter} make?`
+    flashcardInner = `<div class="flashcard-letter">${word.letter}</div>`
+  } else if (topicType === 'math' && word.answer !== undefined) {
+    quizPrompt = `How many do you count? 🔢`
+    quizSpeech = `How many do you count?`
+    flashcardInner = `<div class="flashcard-dots">${word.emoji}</div>`
+  }
+
   renderLessonShell(`
     <div class="buddy-container" id="lesson-buddy"></div>
     <div class="flashcard">
-      <div class="flashcard-emoji">${word.emoji}</div>
+      ${flashcardInner}
     </div>
-    <div class="buddy-says" id="buddy-msg">What is this? 🤔</div>
+    <div class="buddy-says" id="buddy-msg">${quizPrompt}</div>
     ${hasSpeechRecognition()
       ? `<button class="mic-btn" id="mic-btn">🎤</button>`
       : renderTapQuiz(word)
@@ -494,7 +658,7 @@ async function showQuizQuestion() {
   `, pct)
 
   setBuddyState('thinking')
-  await speak('What is this?')
+  await speak(quizSpeech)
   setBuddyState('listening')
 
   if (hasSpeechRecognition()) {
@@ -531,6 +695,26 @@ async function showQuizQuestion() {
 }
 
 function renderTapQuiz(target: WordItem): string {
+  const topicType = currentTopic?.type || 'vocabulary'
+
+  if (topicType === 'math' && target.answer !== undefined) {
+    // Math quiz: show dots, pick the equation
+    const distractors = shuffle(currentTopic!.words.filter(w => w.word !== target.word)).slice(0, 3)
+    const opts = shuffle([target, ...distractors])
+    return `<div class="choices">${opts.map(o =>
+      `<div class="choice-card quiz-option" data-word="${o.word}"><div class="choice-label">${o.word} = ${o.answer}</div></div>`
+    ).join('')}</div>`
+  }
+
+  if (topicType === 'alphabet' && target.letter) {
+    // Alphabet quiz: show letter, "What sound does it make?" — pick phonics
+    const distractors = shuffle(currentTopic!.words.filter(w => w.word !== target.word)).slice(0, 3)
+    const opts = shuffle([target, ...distractors])
+    return `<div class="choices">${opts.map(o =>
+      `<div class="choice-card quiz-option" data-word="${o.word}"><div class="choice-label" style="font-size:1.2rem">"${o.phonics || o.word}"<br><small>${o.letter} - ${o.example}</small></div></div>`
+    ).join('')}</div>`
+  }
+
   const distractors = shuffle(currentTopic!.words.filter(w => w.word !== target.word)).slice(0, 3)
   const opts = shuffle([target, ...distractors])
   return `<div class="choices">${opts.map(o =>
