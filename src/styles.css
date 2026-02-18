@@ -470,6 +470,125 @@ html, body {
   100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
 }
 
+/* ===== REVIEW BADGE ===== */
+.review-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange), var(--yellow));
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  animation: popIn 0.3s;
+}
+
+/* ===== STORY BUBBLE ===== */
+.story-bubble {
+  background: linear-gradient(135deg, #E8F4FD, #FFF4D6);
+  border-radius: 24px;
+  padding: 16px 24px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 15px var(--shadow);
+  position: relative;
+  animation: popIn 0.4s;
+  margin: 8px 0;
+}
+.story-text {
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* ===== BADGE / COLLECTION ===== */
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 8px;
+}
+.badge-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+.badge-earned {
+  background: #fff;
+  box-shadow: 0 4px 15px var(--shadow);
+  animation: popIn 0.4s;
+}
+.badge-earned:hover {
+  transform: scale(1.08);
+}
+.badge-locked {
+  background: #e8e8e8;
+  opacity: 0.6;
+}
+.badge-card-emoji {
+  font-size: 2.2rem;
+}
+.badge-card-name {
+  font-size: 0.75rem;
+  color: #333;
+  font-weight: 900;
+}
+.badge-card-hint {
+  font-size: 0.6rem;
+  color: #999;
+  font-weight: 600;
+}
+
+/* ===== BADGE POPUP ===== */
+.badge-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s;
+}
+.badge-popup-inner {
+  background: #fff;
+  border-radius: 28px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popIn 0.4s;
+}
+.badge-popup-emoji {
+  font-size: 5rem;
+  margin-bottom: 12px;
+}
+.badge-popup-title {
+  font-size: 1.5rem;
+  color: var(--yellow);
+  font-weight: 900;
+}
+.badge-popup-name {
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 480px) {
   .welcome-title { font-size: 1.8rem; }
