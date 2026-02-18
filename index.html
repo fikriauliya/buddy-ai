@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keluarga Auliya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  
+  <nav id="navbar">
+    <div class="nav-brand">🌙 Auliya</div>
+    <div class="nav-links">
+      <a href="#home">Beranda</a>
+      <a href="#prayer">Sholat</a>
+      <a href="#stories">Cerita</a>
+      <a href="#family">Keluarga</a>
+      <a href="#dua">Doa</a>
+    </div>
+    <button id="menu-toggle" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="section">
+    <div class="container header-section">
+      <div class="moon">🌙</div>
+      <h1 class="title-gradient">Keluarga Auliya</h1>
+      <p class="subtitle">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+      
+      <div class="countdown-card">
+        <h3>⏰ Ramadan Countdown</h3>
+        <div class="countdown-timer" id="ramadan-countdown"></div>
+        <p class="muted">Menuju Ramadan 1447 H</p>
+      </div>
+
+      <div class="nav-cards">
+        <a href="#prayer" class="nav-card">
+          <div class="icon">🕌</div>
+          <h3>Waktu Sholat</h3>
+          <p>Jadwal sholat hari ini</p>
+        </a>
+        <a href="#stories" class="nav-card">
+          <div class="icon">📖</div>
+          <h3>Cerita Anak</h3>
+          <p>Kisah para Nabi</p>
+        </a>
+        <a href="#family" class="nav-card">
+          <div class="icon">👨‍👩‍👧‍👦</div>
+          <h3>Keluarga Kita</h3>
+          <p>Profil keluarga Auliya</p>
+        </a>
+        <a href="#dua" class="nav-card">
+          <div class="icon">🤲</div>
+          <h3>Doa Harian</h3>
+          <p>Doa sehari-hari</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRAYER -->
+  <section id="prayer" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon">🕌</div>
+        <h2 class="title-gradient">Waktu Sholat</h2>
+        <p class="subtitle">Depok, Indonesia • Ramadan 1447 H</p>
+      </div>
+      <div class="card">
+        <h2 class="card-title">📅 Jadwal Hari Ini</h2>
+        <div class="prayer-grid">
+          <div class="prayer-item"><div class="name">🌃 Imsak</div><div class="time">04:32</div></div>
+          <div class="prayer-item"><div class="name">🌅 Subuh</div><div class="time">04:42</div></div>
+          <div class="prayer-item"><div class="name">☀️ Terbit</div><div class="time">05:58</div></div>
+          <div class="prayer-item"><div class="name">🌤️ Dzuhur</div><div class="time">12:06</div></div>
+          <div class="prayer-item"><div class="name">🌇 Ashar</div><div class="time">15:23</div></div>
+          <div class="prayer-item"><div class="name">🌆 Maghrib</div><div class="time">18:14</div></div>
+          <div class="prayer-item"><div class="name">🌙 Isya</div><div class="time">19:24</div></div>
+        </div>
+      </div>
+      <div class="dua-box">
+        <div class="arabic">اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</div>
+        <div class="translation">"Ya Allah, untuk-Mu aku berpuasa, kepada-Mu aku beriman, dan dengan rezeki-Mu aku berbuka"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section id="stories" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon">📖</div>
+        <h2 class="title-gradient">Cerita untuk Anak-anak</h2>
+        <p class="subtitle">Kisah para Nabi untuk inspirasi</p>
+      </div>
+
+      <div class="kids-grid">
+        <div class="kid-card" data-story="yusuf">
+          <div class="emoji">👦🏻</div>
+          <h3>Untuk Yusuf</h3>
+          <p class="muted">Kisah Nabi Yusuf AS</p>
+          <p class="accent-text">Usia 10 tahun</p>
+        </div>
+        <div class="kid-card" data-story="ibrahim">
+          <div class="emoji">👦🏻</div>
+          <h3>Untuk Ibrahim</h3>
+          <p class="muted">Kisah Nabi Ibrahim AS</p>
+          <p class="accent-text">Usia 7 tahun</p>
+        </div>
+        <div class="kid-card" data-story="fatih">
+          <div class="emoji">👶🏻</div>
+          <h3>Untuk Fatih</h3>
+          <p class="muted">Kisah Nabi Yahya AS</p>
+          <p class="accent-text">Usia 2 tahun</p>
+        </div>
+      </div>
+
+      <!-- Yusuf Story -->
+      <div id="story-yusuf" class="story-panel hidden">
+        <h2 class="title-gradient" style="text-align:center;margin-bottom:1.5rem;">⭐ Untuk Kak Yusuf</h2>
+        <div class="story-card">
+          <h3>🌟 Bab 1: Mimpi yang Indah</h3>
+          <p>Kak Yusuf, tahukah kamu? Namamu berasal dari seorang Nabi yang sangat tampan dan sangat sabar. Nabi Yusuf AS punya mimpi yang luar biasa — dia melihat 11 bintang, matahari, dan bulan bersujud kepadanya!</p>
+          <p>Ayahnya, Nabi Ya'qub AS, bilang: "Nak, jangan ceritakan mimpimu ke kakak-kakakmu. Simpan dalam hati." Nabi Yusuf AS adalah anak yang penurut.</p>
+          <div class="moral">💡 <strong>Pelajaran:</strong> Kadang kita perlu menyimpan hal-hal spesial dalam hati, dan selalu mendengarkan nasihat orang tua.</div>
+        </div>
+        <div class="story-card">
+          <h3>🕳️ Bab 2: Ujian di Sumur</h3>
+          <p>Tapi kakak-kakak Nabi Yusuf AS iri padanya. Mereka memasukkan Yusuf kecil ke dalam sumur yang dalam dan gelap!</p>
+          <p>Apakah Nabi Yusuf AS menangis dan menyerah? Tidak! Dia tetap berdoa dan percaya pada Allah. Dan Allah mengirim kafilah yang menolongnya.</p>
+          <div class="moral">💡 <strong>Pelajaran:</strong> Ketika kita menghadapi masalah berat, jangan putus asa. Tetap berdoa dan percaya Allah pasti membantu.</div>
+        </div>
+        <div class="story-card">
+          <h3>👑 Bab 3: Dari Penjara Menjadi Raja</h3>
+          <p>Perjalanan Nabi Yusuf AS panjang — dia pernah jadi budak, pernah dipenjara padahal tidak salah. Tapi dia TIDAK PERNAH berhenti berbuat baik dan jujur.</p>
+          <p>Akhirnya, karena kejujuran dan kesabarannya, dia diangkat menjadi bendahara Mesir!</p>
+          <div class="moral">💡 <strong>Pelajaran:</strong> Kejujuran dan kesabaran SELALU berbuah manis.</div>
+        </div>
+        <div class="message-box">
+          <h2>💝 Untuk Kak Yusuf Dzikri Auliya</h2>
+          <p>Papa dan Mama memberimu nama Yusuf karena mereka berharap kamu tumbuh menjadi anak yang:<br><br>⭐ <strong>Tampan</strong> hatinya<br>⭐ <strong>Sabar</strong> menghadapi ujian<br>⭐ <strong>Jujur</strong> dalam segala hal<br>⭐ <strong>Sukses</strong> karena akhlak yang mulia<br><br>Kamu adalah bintang keluarga Auliya! ✨</p>
+        </div>
+      </div>
+
+      <!-- Ibrahim Story -->
+      <div id="story-ibrahim" class="story-panel hidden">
+        <h2 class="title-gradient" style="text-align:center;margin-bottom:1.5rem;">🔥 Untuk Dek Ibrahim</h2>
+        <div class="story-card">
+          <h3>🤔 Bab 1: Anak yang Suka Bertanya</h3>
+          <p>Dek Ibrahim, namamu berasal dari Nabi Ibrahim AS — seorang anak yang sangat BERANI dan CERDAS!</p>
+          <p>Waktu masih kecil, dia suka sekali bertanya: "Kenapa orang-orang menyembah patung? Patung tidak bisa bicara, tidak bisa makan, tidak bisa apa-apa!"</p>
+          <div class="moral">💡 <strong>Pelajaran:</strong> Bertanya itu bagus! Anak pintar selalu ingin tahu dan mencari kebenaran.</div>
+        </div>
+        <div class="story-card">
+          <h3>🔥 Bab 2: Api yang Dingin</h3>
+          <p>Karena Nabi Ibrahim AS tidak mau menyembah patung, raja yang jahat memerintahkan dia dibakar hidup-hidup!</p>
+          <p>Tapi apakah Nabi Ibrahim AS takut? TIDAK! Allah memerintahkan api: <em>"Jadilah dingin dan selamat untuk Ibrahim!"</em> Api berubah sejuk seperti taman!</p>
+          <div class="moral">💡 <strong>Pelajaran:</strong> Kalau kita berani membela kebenaran, Allah akan selalu melindungi kita.</div>
+        </div>
+        <div class="story-card">
+          <h3>🕋 Bab 3: Pembangun Ka'bah</h3>
+          <p>Nabi Ibrahim AS dan anaknya, Nabi Ismail AS, membangun Ka'bah — rumah Allah yang kita hadapi setiap kali sholat!</p>
+          <p>Mereka berdoa: <em>"Ya Tuhan kami, terimalah dari kami. Sesungguhnya Engkaulah Yang Maha Mendengar lagi Maha Mengetahui."</em></p>
+          <div class="moral">💡 <strong>Pelajaran:</strong> Bekerja sama dengan keluarga dan selalu berdoa saat melakukan kebaikan.</div>
+        </div>
+        <div class="message-box">
+          <h2>💝 Untuk Dek Ibrahim Hilmi Auliya</h2>
+          <p>Papa dan Mama memberimu nama Ibrahim karena mereka berharap kamu menjadi:<br><br>🔥 <strong>Berani</strong> membela kebenaran<br>🧠 <strong>Cerdas</strong> dan suka belajar<br>💪 <strong>Kuat</strong> imannya<br>🤝 <strong>Pekerja keras</strong> yang suka membantu<br><br>Kamu adalah pahlawan kecil keluarga Auliya! 💪</p>
+        </div>
+      </div>
+
+      <!-- Fatih Story -->
+      <div id="story-fatih" class="story-panel hidden">
+        <h2 class="title-gradient" style="text-align:center;margin-bottom:1.5rem;">🌸 Untuk Dek Fatih</h2>
+        <div class="story-card">
+          <h3>🎁 Hadiah dari Allah</h3>
+          <p>Dek Fatih sayang, namamu artinya "Pembuka" — seperti bunga yang membuka kelopaknya! 🌸</p>
+          <p>Nabi Yahya AS adalah anak yang sangat spesial. Ayahnya, Nabi Zakaria AS, sudah tua dan sangat ingin punya anak. Allah memberikan Yahya sebagai hadiah yang indah!</p>
+          <p>Yahya kecil tumbuh menjadi anak yang:</p>
+          <ul>
+            <li>💕 Sangat <strong>sayang</strong> sama Papa dan Mama</li>
+            <li>🐦 <strong>Baik</strong> kepada semua makhluk</li>
+            <li>😊 <strong>Lembut</strong> dan tidak pernah jahat</li>
+            <li>📖 <strong>Pintar</strong> sejak kecil</li>
+          </ul>
+          <div class="moral">💡 <strong>Untuk Dek Fatih:</strong> Kamu juga hadiah terindah untuk Papa, Mama, Kak Yusuf, dan Dek Ibrahim! 🎁</div>
+        </div>
+        <div class="story-card">
+          <h3>🌈 Yahya yang Penuh Kasih</h3>
+          <p>Nabi Yahya AS tidak pernah marah-marah. Tidak pernah memukul. Tidak pernah berkata kasar. Dia suka bermain dengan anak-anak lain dengan baik.</p>
+          <p style="font-size:2em;text-align:center;margin:20px 0;">🤗 ❤️ 🌟</p>
+          <div class="moral">💡 <strong>Pelajaran:</strong> Jadilah anak yang lembut dan penuh kasih sayang, seperti Nabi Yahya AS!</div>
+        </div>
+        <div class="message-box">
+          <h2>💝 Untuk Dek Fatih Yahya Auliya</h2>
+          <p style="font-size:1.2em;">🌸 Kamu adalah <strong>bunga</strong> yang mekar di keluarga Auliya<br>☀️ Kamu adalah <strong>matahari</strong> yang menyinari rumah<br>🍬 Kamu adalah <strong>permen</strong> yang manis buat semuanya<br><br>Papa, Mama, Kak Yusuf, dan Dek Ibrahim sayang Dek Fatih! 💕</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAMILY -->
+  <section id="family" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon">👨‍👩‍👧‍👦</div>
+        <h2 class="title-gradient">Keluarga Auliya</h2>
+        <p class="subtitle">Bersama dalam cinta dan iman</p>
+      </div>
+      <div class="card">
+        <div class="family-member"><div class="avatar">👨🏻</div><div class="info"><h3>Papa Levi</h3><p>Pahlevi Auliya — Kepala keluarga yang keren! VP di Ruangguru, suka teknologi, dan sayang banget sama keluarga.</p></div></div>
+        <div class="family-member"><div class="avatar">👩🏻</div><div class="info"><h3>Mama Irma</h3><p>Irma Detia Rini — Ibu super yang mengurus rumah dan keluarga dengan penuh cinta. Anggota Ibu Profesional!</p></div></div>
+        <div class="family-member"><div class="avatar">👦🏻</div><div class="info"><h3>Kak Yusuf</h3><p>Yusuf Dzikri Auliya (10 tahun) — Kakak sulung yang sabar dan tampan hatinya, seperti Nabi Yusuf AS.</p></div></div>
+        <div class="family-member"><div class="avatar">👦🏻</div><div class="info"><h3>Dek Ibrahim</h3><p>Ibrahim Hilmi Auliya (7 tahun) — Anak kedua yang berani dan cerdas, seperti Nabi Ibrahim AS.</p></div></div>
+        <div class="family-member"><div class="avatar">👶🏻</div><div class="info"><h3>Dek Fatih</h3><p>Fatih Yahya Auliya (2 tahun) — Si bungsu yang manis dan lembut, pembuka kebahagiaan keluarga!</p></div></div>
+      </div>
+      <div class="message-box">
+        <h2>🏠 Rumah adalah Surga Kecil</h2>
+        <p>"Sebaik-baik kalian adalah yang paling baik kepada keluarganya"<br><em class="muted">— HR. Tirmidzi</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUA -->
+  <section id="dua" class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-icon">🤲</div>
+        <h2 class="title-gradient">Doa Harian</h2>
+        <p class="subtitle">Doa-doa untuk sehari-hari</p>
+      </div>
+      <div class="dua-box"><h3 class="dua-title">🌅 Doa Bangun Tidur</h3><div class="arabic">اَلْحَمْدُ لِلَّهِ الَّذِيْ أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُوْرُ</div><div class="translation">"Segala puji bagi Allah yang telah menghidupkan kami setelah mematikan kami, dan kepada-Nya kami akan dikembalikan"</div></div>
+      <div class="dua-box"><h3 class="dua-title">🍽️ Doa Sebelum Makan</h3><div class="arabic">بِسْمِ اللَّهِ وَعَلَى بَرَكَةِ اللَّهِ</div><div class="translation">"Dengan nama Allah dan dengan berkah Allah"</div></div>
+      <div class="dua-box"><h3 class="dua-title">🍽️ Doa Sesudah Makan</h3><div class="arabic">اَلْحَمْدُ لِلَّهِ الَّذِيْ أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِيْنَ</div><div class="translation">"Segala puji bagi Allah yang telah memberi kami makan dan minum serta menjadikan kami orang-orang Islam"</div></div>
+      <div class="dua-box"><h3 class="dua-title">🚪 Doa Keluar Rumah</h3><div class="arabic">بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ</div><div class="translation">"Dengan nama Allah, aku bertawakal kepada Allah. Tidak ada daya dan kekuatan kecuali dengan Allah"</div></div>
+      <div class="dua-box"><h3 class="dua-title">😴 Doa Sebelum Tidur</h3><div class="arabic">بِاسْمِكَ اللَّهُمَّ أَمُوْتُ وَأَحْيَا</div><div class="translation">"Dengan nama-Mu ya Allah, aku mati dan aku hidup"</div></div>
+      <div class="dua-box"><h3 class="dua-title">🌙 Doa Berbuka Puasa</h3><div class="arabic">اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</div><div class="translation">"Ya Allah, untuk-Mu aku berpuasa, kepada-Mu aku beriman, dan dengan rezeki-Mu aku berbuka"</div></div>
+      <div class="dua-box"><h3 class="dua-title">👨‍👩‍👧‍👦 Doa untuk Orang Tua</h3><div class="arabic">رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِيْ صَغِيْرًا</div><div class="translation">"Ya Tuhanku, sayangilah keduanya sebagaimana mereka menyayangiku waktu kecil"</div></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="message-box" style="margin:0;">
+      <h2>💝 Dari Auri untuk Keluarga Auliya</h2>
+      <p>Semoga Ramadan tahun ini membawa keberkahan, kebahagiaan, dan kedekatan untuk Papa Levi, Mama Irma, Kak Yusuf, Dek Ibrahim, dan si kecil Fatih! 🌙✨</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
