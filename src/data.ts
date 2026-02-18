@@ -66,6 +66,44 @@ export const TOPICS: Topic[] = [
       { word: 'feet', emoji: '🦶' }, { word: 'arms', emoji: '💪' },
       { word: 'legs', emoji: '🦵' }, { word: 'hair', emoji: '💇' }
     ]
+  },
+  {
+    id: 'alphabet', name: 'Alphabet', emoji: '🔤', color: '#E74C3C',
+    words: [
+      { word: 'A - Apple', emoji: '🍎' }, { word: 'B - Bear', emoji: '🐻' },
+      { word: 'C - Cat', emoji: '🐱' }, { word: 'D - Dog', emoji: '🐶' },
+      { word: 'E - Egg', emoji: '🥚' }, { word: 'F - Fish', emoji: '🐟' },
+      { word: 'G - Grape', emoji: '🍇' }, { word: 'H - Hat', emoji: '🎩' },
+      { word: 'I - Ice cream', emoji: '🍦' }, { word: 'J - Juice', emoji: '🧃' },
+      { word: 'K - Kite', emoji: '🪁' }, { word: 'L - Lion', emoji: '🦁' },
+      { word: 'M - Moon', emoji: '🌙' }, { word: 'N - Nest', emoji: '🪺' },
+      { word: 'O - Orange', emoji: '🍊' }, { word: 'P - Penguin', emoji: '🐧' },
+      { word: 'Q - Queen', emoji: '👑' }, { word: 'R - Rainbow', emoji: '🌈' },
+      { word: 'S - Sun', emoji: '☀️' }, { word: 'T - Tree', emoji: '🌳' },
+      { word: 'U - Umbrella', emoji: '☂️' }, { word: 'V - Violin', emoji: '🎻' },
+      { word: 'W - Water', emoji: '💧' }, { word: 'X - Xylophone', emoji: '🎵' },
+      { word: 'Y - Yacht', emoji: '⛵' }, { word: 'Z - Zebra', emoji: '🦓' }
+    ]
+  },
+  {
+    id: 'shapes', name: 'Shapes', emoji: '🔷', color: '#1ABC9C',
+    words: [
+      { word: 'circle', emoji: '⭕' }, { word: 'square', emoji: '🟥' },
+      { word: 'triangle', emoji: '🔺' }, { word: 'star', emoji: '⭐' },
+      { word: 'heart', emoji: '❤️' }, { word: 'diamond', emoji: '💎' },
+      { word: 'rectangle', emoji: '▬' }, { word: 'oval', emoji: '🥚' }
+    ]
+  },
+  {
+    id: 'math', name: 'Math', emoji: '🧮', color: '#F39C12',
+    words: [
+      { word: '1 + 1 = 2', emoji: '🍎🍎' }, { word: '2 + 1 = 3', emoji: '🍎🍎🍎' },
+      { word: '1 + 2 = 3', emoji: '⭐⭐⭐' }, { word: '2 + 2 = 4', emoji: '🟡🟡🟡🟡' },
+      { word: '3 + 1 = 4', emoji: '🔵🔵🔵🔵' }, { word: '3 + 2 = 5', emoji: '🍎🍎🍎🍎🍎' },
+      { word: '4 + 1 = 5', emoji: '⭐⭐⭐⭐⭐' }, { word: '2 + 3 = 5', emoji: '🟢🟢🟢🟢🟢' },
+      { word: '5 + 5 = 10', emoji: '🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴' },
+      { word: '3 + 3 = 6', emoji: '🟡🟡🟡🟡🟡🟡' }
+    ]
   }
 ]
 
